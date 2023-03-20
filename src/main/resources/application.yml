@@ -1,0 +1,16 @@
+spring:
+  security:
+    oauth2:
+      client:
+        registration:
+          auth0:
+            client-id: iG4kIafVzBFoFLNvZwqf6TeXNAQr8Mbl
+            client-secret: hAWBCE0EXF1gINsHx-yg7mX_dvHbGEunZQF9ogsOmcS9l5Jz0DKWd-8I_3dIGCB7
+            scope:
+              - openid
+              - profile
+              - email
+        provider:
+          auth0:
+            # trailing slash is important!
+            issuer-uri: https://watch-authentification.eu.auth0.com/
