@@ -22,6 +22,7 @@ public class LogoutController extends SecurityContextLogoutHandler {
     private final Logger log = LoggerFactory.getLogger(this.getClass());
     private final ClientRegistrationRepository clientRegistrationRepository;
 
+
     @Autowired
     public LogoutController(ClientRegistrationRepository clientRegistrationRepository) {
         this.clientRegistrationRepository = clientRegistrationRepository;

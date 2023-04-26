@@ -26,7 +26,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         // http.cors();
         http.authorizeRequests()
                 // require authentication on all paths except the home page
-                .mvcMatchers("/", "/user", "/question","/question/*").permitAll()
+                .mvcMatchers("/","/user", "/question","/question/*").permitAll()
                 .antMatchers(POST,"/user", "/question/*","/question/*", "/question").permitAll()
                 .antMatchers(DELETE,"/favorites/delete/*", "/homepage/*/delete/*").permitAll()
 //                .anyRequest().authenticated()
