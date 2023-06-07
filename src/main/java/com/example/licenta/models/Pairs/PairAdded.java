@@ -1,6 +1,5 @@
-package com.example.licenta.models.Tests;
-
-import com.example.licenta.entities.Test;
+package com.example.licenta.models.Pairs;
+import com.example.licenta.entities.Pair;
 import lombok.*;
 
 import java.util.Objects;
@@ -10,8 +9,8 @@ import java.util.Objects;
 @ToString
 @RequiredArgsConstructor
 @AllArgsConstructor
-public class TestAdded {
-    private Test test = new Test();
+public class PairAdded {
+    private Pair pair = new Pair();
     private String error = "";
     private int statusCode = 500;
 
@@ -19,12 +18,12 @@ public class TestAdded {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        TestAdded testAdded = (TestAdded) o;
-        return statusCode == testAdded.statusCode && Objects.equals(test, testAdded.test) && Objects.equals(error, testAdded.error);
+        PairAdded pairAdded = (PairAdded) o;
+        return statusCode == pairAdded.statusCode && Objects.equals(pair, pairAdded.pair) && Objects.equals(error, pairAdded.error);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(test, error, statusCode);
+        return Objects.hash(pair, error, statusCode);
     }
 }

@@ -13,6 +13,9 @@ import com.example.licenta.service.TestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
@@ -30,7 +33,26 @@ public class TestController {
         AllTests result = testService.findAll();
         return result;
     }
+    @GetMapping("{user_id}/tests")
+    public AllTests getUserTestss(@PathVariable Integer user_id) {
+        //check to see if user_id exists
+        if(testService.checkUserExists(user_id))
+        {
+            //creating the array of products that belong to user_id
+            List<Test> tests = new ArrayList<>();
+            for(Test test : testService.findAll().getTests())
+            {
+                //verify that product belongs to user_id
+                if(test.getUser().equals(user_id))
+                {
+                    tests.add(test);
+                }
+            }
+            return new AllTests(tests, "", 200);
+        }
 
+        return new AllTests(new ArrayList<>(), "User has no products", 200);
+    }
     @PostMapping("{create}")
     public TestAdded create(@RequestBody Test test) {
         TestAdded result = testService.create(test);

@@ -1,16 +1,12 @@
 package com.example.licenta.entities;
 
 import lombok.*;
-import org.hibernate.Hibernate;
 
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.validation.constraints.NotNull;
-import java.util.Date;
-import java.util.Objects;
 
 @Entity
 @Getter
@@ -19,17 +15,16 @@ import java.util.Objects;
 @RequiredArgsConstructor
 @AllArgsConstructor
 
-public class Test {
+public class Pair {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @NotNull(message = "user should not be null!")
-    private Integer user;
-    @NotNull(message = "name should not be null!")
-    private String name;
-    private String text;
-    private Integer score;
-    private Date date;
+    //@NotNull(message = "text should not be null!")
+    private Integer question;
+    //@NotNull(message = "type should not be null!")
+    private String clue;
+    //@NotNull(message = "test name should not be null!")
+    private String correct;
 
 
 }

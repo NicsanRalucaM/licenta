@@ -8,6 +8,7 @@ import com.example.licenta.models.Tests.TestAdded;
 import com.example.licenta.models.Tests.TestUpdated;
 import com.example.licenta.models.Tests.TestAdded;
 import com.example.licenta.repository.TestRepository;
+import com.example.licenta.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,10 +20,12 @@ import java.util.Optional;
 public class TestService {
 
     private final TestRepository testRepository;
+    private final UserRepository userRepository;
 
     @Autowired
-    public TestService(TestRepository testRepository) {
+    public TestService(TestRepository testRepository,UserRepository userRepository) {
         this.testRepository = testRepository;
+        this.userRepository = userRepository;
     }
 
     public AllTests findAll() {
@@ -98,5 +101,12 @@ public class TestService {
 
             return testUpdated;
         }
+    }
+    public Integer getUserId(Integer id) {
+        return testRepository.getById(id).getUser();
+    }
+
+    public boolean checkUserExists(Integer id) {
+        return userRepository.findById(id).isPresent();
     }
 }

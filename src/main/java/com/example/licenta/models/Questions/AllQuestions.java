@@ -21,7 +21,7 @@ public class AllQuestions {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        com.example.licenta.models.Questions.AllQuestions allQuestions = (com.example.licenta.models.Questions.AllQuestions) o;
+        AllQuestions allQuestions = (AllQuestions) o;
         return statusCode == allQuestions.statusCode && Objects.equals(questions, allQuestions.questions) && Objects.equals(error, allQuestions.error);
     }
 
