@@ -18,20 +18,17 @@ import java.util.Objects;
 @RequiredArgsConstructor
 @AllArgsConstructor
 
-public class Question {
+public class Answer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     //@NotNull(message = "text should not be null!")
-    private String text;
+    private Integer result;
+    private Integer archive;
     //@NotNull(message = "type should not be null!")
-    private Boolean value;
+    private Integer question;
     //@NotNull(message = "test name should not be null!")
-    private Integer test;
-    private Integer score;
-    private Boolean ismultiple;
-    private Boolean ispair;
-    private Boolean isbinar;
-    private Boolean isfree;
+    private String value;
+    private String text;
 
 }

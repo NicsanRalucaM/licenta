@@ -21,8 +21,10 @@ public class Pair {
     private Integer id;
     //@NotNull(message = "text should not be null!")
     private Integer question;
+    private Integer numberCorrect;
     //@NotNull(message = "type should not be null!")
     private String clue;
+    private String letterClue;
     //@NotNull(message = "test name should not be null!")
     private String correct;
 

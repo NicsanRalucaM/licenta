@@ -47,6 +47,23 @@ public class ArchiveController {
 
         return new AllArchives(new ArrayList<>(), "Test has no Archives", 200);
     }
+    @GetMapping("user/{user_id}/archives")
+    public AllArchives getTestArchivess(@PathVariable Integer user_id) {
+        //check to see if user_id exists
+        if (archiveService.checkUserExists(user_id)) {
+            //creating the array of products that belong to user_id
+            List<Archive> archives = new ArrayList<>();
+            for (Archive archive : archiveService.findAll().getArchives()) {
+                //verify that product belongs to user_id
+                if (archive.getUser().equals(user_id)) {
+                    archives.add(archive);
+                }
+            }
+            return new AllArchives(archives, "", 200);
+        }
+
+        return new AllArchives(new ArrayList<>(), "User has no Archives", 200);
+    }
 
     @PostMapping("{create}")
     public ArchiveAdded create(@RequestBody Archive archive) {

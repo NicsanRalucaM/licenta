@@ -24,6 +24,7 @@ public class Archive {
     private Integer id;
     //@NotNull(message = "text should not be null!")
     private Integer test;
+    private Integer user;
     //@NotNull(message = "type should not be null!")
     private Integer component;
     //@NotNull(message = "test name should not be null!")

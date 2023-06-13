@@ -10,6 +10,7 @@ import com.example.licenta.models.Archives.SingleArchive;
 import com.example.licenta.models.Tests.TestUpdated;
 import com.example.licenta.repository.ArchiveRepository;
 import com.example.licenta.repository.TestRepository;
+import com.example.licenta.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,11 +23,13 @@ public class ArchiveService {
 
     private final ArchiveRepository archiveRepository;
     private final TestRepository testRepository;
+    private final UserRepository userRepository;
 
     @Autowired
-    public ArchiveService(ArchiveRepository archiveRepository, TestRepository testRepository) {
+    public ArchiveService(ArchiveRepository archiveRepository, TestRepository testRepository, UserRepository userRepository) {
         this.archiveRepository = archiveRepository;
         this.testRepository = testRepository;
+        this.userRepository = userRepository;
     }
 
     public AllArchives findAll() {
@@ -105,5 +108,9 @@ public class ArchiveService {
 
     public boolean checkTestExists(Integer id) {
         return testRepository.findById(id).isPresent();
+    }
+
+    public boolean checkUserExists(Integer id) {
+        return userRepository.findById(id).isPresent();
     }
 }

@@ -24,6 +24,7 @@ public class Choice {
     private Integer id;
     //@NotNull(message = "text should not be null!")
     private Integer question;
+    private String letter;
     //@NotNull(message = "type should not be null!")
     private Boolean type;
     //@NotNull(message = "test name should not be null!")

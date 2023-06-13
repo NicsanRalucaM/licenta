@@ -1,6 +1,6 @@
-package com.example.licenta.models.Archives;
+package com.example.licenta.models.Answers;
 
-import com.example.licenta.entities.Archive;
+import com.example.licenta.entities.Answer;
 import lombok.*;
 
 import java.util.ArrayList;
@@ -12,8 +12,8 @@ import java.util.Objects;
 @ToString
 @RequiredArgsConstructor
 @AllArgsConstructor
-public class AllArchives {
-    private List<Archive> archives = new ArrayList<Archive>();
+public class AllAnswers {
+    private List<Answer> answers = new ArrayList<Answer>();
     private String error = "";
     private int statusCode = 500;
 
@@ -21,12 +21,12 @@ public class AllArchives {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        AllArchives allArchives = (AllArchives) o;
-        return statusCode == allArchives.statusCode && Objects.equals(allArchives, allArchives.archives) && Objects.equals(error, allArchives.error);
+        AllAnswers allAnswers = (AllAnswers) o;
+        return statusCode == allAnswers.statusCode && Objects.equals(answers, allAnswers.answers) && Objects.equals(error, allAnswers.error);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(archives, error, statusCode);
+        return Objects.hash(answers, error, statusCode);
     }
 }

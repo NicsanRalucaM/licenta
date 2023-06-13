@@ -24,7 +24,7 @@ public class QuestionService {
     private final TestRepository testRepository;
 
     @Autowired
-    public QuestionService(QuestionRepository questionRepository,TestRepository testRepository) {
+    public QuestionService(QuestionRepository questionRepository, TestRepository testRepository) {
 
         this.questionRepository = questionRepository;
         this.testRepository = testRepository;
@@ -84,6 +84,7 @@ public class QuestionService {
             return questionUpdated;
         }
     }
+
     public QuestionAdded create(Question question) {
         QuestionAdded questionAdded = new QuestionAdded();
         var result = questionRepository.save(question);
@@ -95,9 +96,18 @@ public class QuestionService {
         } else {
             questionAdded.setQuestion(question);
             questionAdded.setStatusCode(200);
+            var testId = questionAdded.getQuestion().getTest();
+            var questionScore = questionAdded.getQuestion().getScore();
+            var test = testRepository.getById(testId);
+            var testScore = test.getScore();
+            test.setScore(questionScore + testScore);
+            testRepository.save(test);
+
+
             return questionAdded;
         }
     }
+
     public boolean checkTestExists(Integer id) {
         return testRepository.findById(id).isPresent();
     }
