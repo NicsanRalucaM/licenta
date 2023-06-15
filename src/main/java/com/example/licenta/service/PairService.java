@@ -1,9 +1,12 @@
 package com.example.licenta.service;
 
 
+import com.example.licenta.entities.Choice;
 import com.example.licenta.entities.Pair;
+import com.example.licenta.models.Choices.ChoiceUpdated;
 import com.example.licenta.models.Pairs.AllPairs;
 import com.example.licenta.models.Pairs.PairAdded;
+import com.example.licenta.models.Pairs.PairUpdated;
 import com.example.licenta.models.Pairs.SinglePair;
 import com.example.licenta.repository.PairRepository;
 import com.example.licenta.repository.QuestionRepository;
@@ -12,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 
 import java.util.ArrayList;
+import java.util.Optional;
 
 @Service
 public class PairService {
@@ -20,9 +24,9 @@ public class PairService {
     private final QuestionRepository questionRepository;
 
     @Autowired
-    public PairService(PairRepository pairRepository,QuestionRepository questionRepository) {
+    public PairService(PairRepository pairRepository, QuestionRepository questionRepository) {
         this.pairRepository = pairRepository;
-        this.questionRepository=questionRepository;
+        this.questionRepository = questionRepository;
     }
 
     public AllPairs findAll() {
@@ -69,10 +73,33 @@ public class PairService {
         return pairRepository.count();
     }
 
+    public PairUpdated update(Integer id, Pair pair) {
+        PairUpdated pairUpdated = new PairUpdated();
+        Optional<Pair> result = pairRepository.findById(id);
+
+        if (result.isEmpty()) {
+            pairUpdated.setError("pair not found");
+            pairUpdated.setStatusCode(404);
+
+            return pairUpdated;
+        } else {
+            Pair entity = result.get();
+            Integer identifier = entity.getId();
+            entity = pair;
+            entity.setId(identifier);
+
+            pairUpdated.setPair(pairRepository.save(entity));
+            pairUpdated.setStatusCode(202);
+
+            return pairUpdated;
+        }
+    }
+
 
     public void deleteById(Integer testId) {
         pairRepository.deleteById(testId);
     }
+
     public boolean checkQuestionExists(Integer id) {
         return questionRepository.findById(id).isPresent();
     }

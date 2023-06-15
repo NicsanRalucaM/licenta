@@ -5,8 +5,10 @@ import com.example.licenta.entities.Choice;
 import com.example.licenta.entities.Question;
 import com.example.licenta.models.Choices.AllChoices;
 import com.example.licenta.models.Choices.ChoiceAdded;
+import com.example.licenta.models.Choices.ChoiceUpdated;
 import com.example.licenta.models.Choices.SingleChoice;
 import com.example.licenta.models.Questions.AllQuestions;
+import com.example.licenta.models.Questions.QuestionUpdated;
 import com.example.licenta.service.ChoiceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -47,6 +49,12 @@ public class ChoiceController {
     @DeleteMapping("delete/{id}")
     public void delete(@PathVariable Integer id) {
         choiceService.deleteById(id);
+    }
+
+    @PutMapping("update/{id}")
+    public ChoiceUpdated update(@PathVariable Integer id, @RequestBody Choice choice) {
+        ChoiceUpdated result = choiceService.update(id, choice);
+        return result;
     }
 
     @GetMapping("{question_id}/choices")

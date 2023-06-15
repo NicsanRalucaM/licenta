@@ -1,10 +1,12 @@
 package com.example.licenta.service;
 
 import com.example.licenta.entities.Choice;
+import com.example.licenta.entities.Question;
 import com.example.licenta.models.Choices.AllChoices;
 import com.example.licenta.models.Choices.ChoiceAdded;
 import com.example.licenta.models.Choices.ChoiceUpdated;
 import com.example.licenta.models.Choices.SingleChoice;
+import com.example.licenta.models.Questions.QuestionUpdated;
 import com.example.licenta.repository.ChoiceRepository;
 import com.example.licenta.repository.QuestionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +23,7 @@ public class ChoiceService {
     private final QuestionRepository questionRepository;
 
     @Autowired
-    public ChoiceService(ChoiceRepository choiceRepository,QuestionRepository questionRepository) {
+    public ChoiceService(ChoiceRepository choiceRepository, QuestionRepository questionRepository) {
         this.choiceRepository = choiceRepository;
         this.questionRepository = questionRepository;
     }
@@ -70,10 +72,32 @@ public class ChoiceService {
         return choiceRepository.count();
     }
 
+    public ChoiceUpdated update(Integer id, Choice choice) {
+        ChoiceUpdated choiceUpdated = new ChoiceUpdated();
+        Optional<Choice> result = choiceRepository.findById(id);
+
+        if (result.isEmpty()) {
+            choiceUpdated.setError("choice not found");
+            choiceUpdated.setStatusCode(404);
+
+            return choiceUpdated;
+        } else {
+            Choice entity = result.get();
+            Integer identifier = entity.getId();
+            entity = choice;
+            entity.setId(identifier);
+
+            choiceUpdated.setChoice(choiceRepository.save(entity));
+            choiceUpdated.setStatusCode(202);
+
+            return choiceUpdated;
+        }
+    }
 
     public void deleteById(Integer choiceId) {
         choiceRepository.deleteById(choiceId);
     }
+
     public boolean checkQuestionExists(Integer id) {
         return questionRepository.findById(id).isPresent();
     }

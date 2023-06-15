@@ -3,8 +3,10 @@ package com.example.licenta.controller;
 import com.example.licenta.entities.Choice;
 import com.example.licenta.entities.Pair;
 import com.example.licenta.models.Choices.AllChoices;
+import com.example.licenta.models.Choices.ChoiceUpdated;
 import com.example.licenta.models.Pairs.AllPairs;
 import com.example.licenta.models.Pairs.PairAdded;
+import com.example.licenta.models.Pairs.PairUpdated;
 import com.example.licenta.models.Pairs.SinglePair;
 import com.example.licenta.service.PairService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,6 +42,12 @@ public class PairController {
     @PostMapping("{create}")
     public PairAdded create(@RequestBody Pair pair) {
         PairAdded result = pairService.create(pair);
+        return result;
+    }
+
+    @PutMapping("update/{id}")
+    public PairUpdated update(@PathVariable Integer id, @RequestBody Pair pair) {
+        PairUpdated result = pairService.update(id, pair);
         return result;
     }
 
