@@ -51,10 +51,8 @@ public class ArchiveController {
     public AllArchives getTestArchivess(@PathVariable Integer user_id) {
         //check to see if user_id exists
         if (archiveService.checkUserExists(user_id)) {
-            //creating the array of products that belong to user_id
             List<Archive> archives = new ArrayList<>();
             for (Archive archive : archiveService.findAll().getArchives()) {
-                //verify that product belongs to user_id
                 if (archive.getUser().equals(user_id)) {
                     archives.add(archive);
                 }

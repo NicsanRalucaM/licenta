@@ -90,6 +90,7 @@ public class ResultService {
             Integer archive = entity.getArchive();
             entity = result;
             entity.setId(identifier);
+            entity.setScore(0);
             if (entity.getArchive() == null)
                 entity.setArchive(archive);
 

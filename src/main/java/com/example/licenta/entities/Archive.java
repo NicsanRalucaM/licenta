@@ -29,5 +29,7 @@ public class Archive {
     private Integer component;
     //@NotNull(message = "test name should not be null!")
     private String name;
+    private Boolean iscompleted;
+
 
 }

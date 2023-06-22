@@ -30,5 +30,10 @@ public class Answer {
     //@NotNull(message = "test name should not be null!")
     private String value;
     private String text;
+    private Boolean ismultiple;
+    private Boolean ispair;
+    private Boolean isbinar;
+    private Boolean isfree;
+
 
 }

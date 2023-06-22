@@ -55,20 +55,20 @@ public class ResultController {
         return result;
     }
 
-    @GetMapping("{test_id}/questions")
+    @GetMapping("{archive_id}/results")
     public AllResults getTestQuestion(@PathVariable Integer archive_id) {
         if (resultService.checkArchiveExists(archive_id)) {
 
             List<Result> results = new ArrayList<>();
             for (Result result : resultService.findAll().getResults()) {
-                if (result.getTest().equals(archive_id)) {
+                if (result.getArchive().equals(archive_id)) {
                     results.add(result);
                 }
             }
             return new AllResults(results, "", 200);
         }
 
-        return new AllResults(new ArrayList<>(), "archive has no Question", 200);
+        return new AllResults(new ArrayList<>(), "archive has no results", 200);
     }
 
 }
